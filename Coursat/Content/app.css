@@ -1,0 +1,8 @@
+﻿.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #fff8f8;
+    background-color: #39755c;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+    background-color: #c0d8ae;
+}

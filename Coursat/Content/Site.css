@@ -1,8 +1,33 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 130px;
+    padding-bottom: 80px;
 }
-
+.navbar-nav {
+    margin: 7.5px -15px;
+    background-color: #39755c;
+}
+.navbar-inverse {
+    background-color: #39755c;
+    border-color: red;
+    height: 100px;
+    padding: 30px;
+    font-size: 25px;
+}
+.navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+    border-color: #fff8f8;
+    background-color: #39755c;
+}
+.navbar-inverse.navbar-nav>li>a {
+    
+    font-size: 25px;
+}
+.container .jumbotron {
+    border-radius: 6px;
+    background-color: #218298;
+    color: #fcfeff;
+    box-shadow: 8px -4px 20px 9px black;
+    text-shadow: 0 0 3px black;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;

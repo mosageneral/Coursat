@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Coursat.Models.Course>
+
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container ">
+   
+        <h1>نتائج البحث</h1>
+        <div class="container ">
+            @foreach (var subitem in Model)
+            {
+                <div class="col-md-4">
+                    <h2>@Html.DisplayFor(modelItem => subitem.Name)</h2>
+                    <img class="thumbnail " src="~/upload/@Html.DisplayFor(modelItem =>subitem.Image)" />
+                    <p>@Html.DisplayFor(modelItem => subitem.Description)</p>
+
+                    @Html.ActionLink("ادخل الكورس ", "Indexcours", new { courseid = subitem.Id }, new { @class = "btn btn-primary" })
+                </div>
+            }
+        </div>
+    
+</div> 

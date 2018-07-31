@@ -10,11 +10,14 @@ using Coursat.Models;
 
 namespace Coursat.Controllers
 {
+   
+    [Authorize(Roles = "Mangers")]
     public class videosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: videos
+      
         public ActionResult Index()
         {
             var videos = db.videos.Include(v => v.Course);
@@ -22,6 +25,7 @@ namespace Coursat.Controllers
         }
 
         // GET: videos/Details/5
+      
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +41,7 @@ namespace Coursat.Controllers
         }
 
         // GET: videos/Create
+       
         public ActionResult Create()
         {
             ViewBag.CourseId = new SelectList(db.Courses, "Id", "Name");
@@ -47,6 +52,7 @@ namespace Coursat.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,Name,Src,CourseId")] video video)
         {
@@ -62,6 +68,7 @@ namespace Coursat.Controllers
         }
 
         // GET: videos/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -81,6 +88,7 @@ namespace Coursat.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Src,CourseId")] video video)
         {
@@ -95,6 +103,7 @@ namespace Coursat.Controllers
         }
 
         // GET: videos/Delete/5
+      
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -111,6 +120,7 @@ namespace Coursat.Controllers
 
         // POST: videos/Delete/5
         [HttpPost, ActionName("Delete")]
+   
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

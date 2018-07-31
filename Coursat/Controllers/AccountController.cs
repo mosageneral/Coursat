@@ -139,6 +139,7 @@ namespace Coursat.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.UserType = new SelectList(new[] { "مستخدم عادي" });
             return View();
         }
 
@@ -151,7 +152,7 @@ namespace Coursat.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email , UserType =model .UserType  };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

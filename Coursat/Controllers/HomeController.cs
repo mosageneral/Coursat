@@ -10,10 +10,27 @@ namespace Coursat.Controllers
     public class HomeController : Controller
     {
         ApplicationDbContext db = new ApplicationDbContext();
+        
         public ActionResult Index()
         {
             return View(db.Categories .ToList ());
         }
+        [Authorize]
+        public ActionResult Chat()
+        {
+            return View("ChatView");
+        }
+        [HttpPost]
+        public ActionResult Search(string searchName)
+        {
+            var result = db.Courses.Where(a => a.Name.Contains(searchName)
+             || a.Description.Contains(searchName)
+             || a.Category.Name.Contains(searchName)
+            ).ToList ();
+
+            return View(result);
+        }
+        [Authorize]
         public ActionResult Indexcours(int courseid)
         {
             var coursee = db.Courses.Find(courseid);

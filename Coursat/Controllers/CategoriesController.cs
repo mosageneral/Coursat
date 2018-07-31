@@ -10,17 +10,21 @@ using Coursat.Models;
 
 namespace Coursat.Controllers
 {
+    
+    [Authorize(Roles = "Mangers")]
     public class CategoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Categories
+        
         public ActionResult Index()
         {
             return View(db.Categories.ToList());
         }
 
         // GET: Categories/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +40,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Categories/Create
+        
         public ActionResult Create()
         {
             return View();
@@ -46,6 +51,7 @@ namespace Coursat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public ActionResult Create([Bind(Include = "ID,Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -59,6 +65,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Categories/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -78,6 +85,7 @@ namespace Coursat.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+       
         public ActionResult Edit([Bind(Include = "ID,Name")] Category category)
         {
             if (ModelState.IsValid)
@@ -90,6 +98,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Categories/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -105,6 +114,7 @@ namespace Coursat.Controllers
         }
 
         // POST: Categories/Delete/5
+       
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -114,7 +124,7 @@ namespace Coursat.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

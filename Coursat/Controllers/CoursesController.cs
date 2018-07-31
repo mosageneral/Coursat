@@ -11,11 +11,15 @@ using System.IO;
 
 namespace Coursat.Controllers
 {
+    [Authorize(Roles="Mangers")]
+   
+
     public class CoursesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Courses
+        
         public ActionResult Index()
         {
             var courses = db.Courses.Include(c => c.Category);
@@ -23,6 +27,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Courses/Details/5
+        
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -38,6 +43,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Courses/Create
+        
         public ActionResult Create()
         {
             ViewBag.CategoryId = new SelectList(db.Categories, "ID", "Name");
@@ -48,6 +54,7 @@ namespace Coursat.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult Create(Course course, HttpPostedFileBase uploads)
         {
@@ -67,6 +74,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Courses/Edit/5
+        
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -86,6 +94,7 @@ namespace Coursat.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,Name,Description,Image,CategoryId")] Course course)
         {
@@ -100,6 +109,7 @@ namespace Coursat.Controllers
         }
 
         // GET: Courses/Delete/5
+        
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -116,6 +126,7 @@ namespace Coursat.Controllers
 
         // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
+        
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {

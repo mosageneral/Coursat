@@ -1,9 +1,35 @@
 ﻿@model Coursat.Models.IndexViewModel
+@using Coursat.Models
+@using Microsoft.AspNet.Identity
 @{
     ViewBag.Title = "Manage";
 }
 
 <h2>@ViewBag.Title.</h2>
+@{
+    var db = new ApplicationDbContext();
+    var userid = User.Identity.GetUserId();
+    var currentuser = db.Users.Where(a => a.Id == userid).SingleOrDefault();
+    if (currentuser.UserType == "Admins")
+    {
+        <a href="~/Categories/Index " class="btn btn-success">انواع فئات الكورسات </a>
+        <a href="~/videos/Index " class="btn btn-success">ادارة الفيديوهات </a>
+        <a href="~/Courses/Index " class="btn btn-success">ادارة الكورسات </a>
+
+
+    }
+    else if (currentuser.UserType == "Mangers")
+    {
+        <a href="~/Categories/Index " class="btn btn-success">انواع فئات الكورسات </a>
+        <a href="~/videos/Index " class="btn btn-success">ادارة الفيديوهات </a>
+        <a href="~/Courses/Index " class="btn btn-success">ادارة الكورسات </a>
+
+    }
+    else
+    {
+        <h2>لطلب ترقية حسابك الى حساب مديرين راسل المدير التنفيذي</h2>
+    }
+}
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 <div>
@@ -28,6 +54,7 @@
             @Model.Logins.Count [
             @Html.ActionLink("Manage", "ManageLogins") ]
         </dd>
+       
         @*
             Phone Numbers can used as a second factor of verification in a two-factor authentication system.
              
@@ -56,12 +83,7 @@
                 }
             </dd>
         *@
-        <dt>Two-Factor Authentication:</dt>
-        <dd>
-            <p>
-                There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-                for details on setting up this ASP.NET application to support two-factor authentication.
-            </p>
+       
             @*@if (Model.TwoFactor)
                 {
                     using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -82,6 +104,6 @@
                         </text>
                     }
                 }*@
-        </dd>
+       
     </dl>
 </div>
